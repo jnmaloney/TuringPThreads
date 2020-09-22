@@ -28,6 +28,23 @@
     <textarea id="output" rows="8"></textarea>
 
     <script type='text/javascript'>
+      // Test browser capabilities
+      var caps = 1;
+      try {
+          SharedArrayBuffer;
+      } catch (e) {
+          caps = 0;
+      }
+      if (caps == 0) {
+        let p = document.createElement('p');
+        p.innerHTML = "PThreads are not supported by this browser configuration.";
+        document.body.append(p)      
+      } else {
+        let script = document.createElement('script');
+        script.src = "pthread_turing_example.js";
+        document.body.append(script)
+      }
+	    
 	function goFullScreen(){
 	    Module.requestFullscreen(false, true);
 	}
@@ -65,6 +82,5 @@
         }
       };
     </script>
-    <script async type="text/javascript" src="pthread_turing_example.js"></script>
   </body>
 </html>
